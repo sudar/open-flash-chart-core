@@ -12,12 +12,27 @@ Author URI: http://sudarmuthu.com/
 === RELEASE NOTES ===
 2008-12-28 - v0.1 - First Version
 2009-01-27 - v0.2 - Second Version
+2009-01-30 - v0.3 - Third Version
 
 */
 
+/**
+* Guess the wp-content and plugin urls/paths
+*/
+if ( !defined('WP_CONTENT_URL') )
+    define( 'WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
+if ( !defined('WP_CONTENT_DIR') )
+    define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
+
+if (!defined('PLUGIN_URL'))
+    define('PLUGIN_URL', WP_CONTENT_URL . '/plugins/');
+if (!defined('PLUGIN_PATH'))
+    define('PLUGIN_PATH', WP_CONTENT_DIR . '/plugins/');
+
 define('SMOFCDIR', dirname(__FILE__) . '/');
 define('SM_OFC_PHP_INC', SMOFCDIR . 'open-flash-chart-2/php-ofc-library/');
-define('SM_OFC_INC_URL', get_bloginfo("wpurl") . '/wp-content/plugins/open-flash-charts-core/open-flash-chart-2/');
+
+define('SM_OFC_INC_URL', PLUGIN_URL . dirname(plugin_basename(__FILE__)) . '/open-flash-chart-2/');
 
 /**
  * Stores whether openflashchart has already been loaded by another extension.
@@ -59,6 +74,8 @@ function openflashchart_core_options_page() {
 </div>
 
 <?php
+// Display credits in footer
+add_action( 'in_admin_footer', 'openflashchart_admin_footer' );
 }
 
 /**
@@ -95,10 +112,32 @@ function openflashchart_core_install() {
     add_option("SM_OFC_PHP_INC", SM_OFC_PHP_INC); // PHP include path
     add_option("SM_OFC_INC_URL", SM_OFC_INC_URL); // include url
 }
+
+/**
+ * Hook called when the Plugin is uninstalled
+ */
+function openflashchart_core_uninstall() {
+    delete_option("SM_OFC_PHP_INC");
+    delete_option("SM_OFC_INC_URL");
+}
+
+/**
+ * Adds Footer links. Based on http://striderweb.com/nerdaphernalia/2008/06/give-your-wordpress-plugin-credit/
+ */
+function openflashchart_admin_footer() {
+	$plugin_data = get_plugin_data( __FILE__ );
+    printf('%1$s ' . __("plugin") .' | ' . __("Version") . ' %2$s | '. __('by') . ' %3$s<br />', $plugin_data['Title'], $plugin_data['Version'], $plugin_data['Author']);
+}
+
 /**
  * Trigger the adding of the menu option.
  */
 add_action('admin_menu', 'openflashchart_core_options');
 register_activation_hook(__FILE__,'openflashchart_core_install');
 add_filter( 'plugin_action_links', 'openflashchart_filter_plugin_actions', 10, 2 );
+
+// when uninstalled
+if (function_exists("register_uninstall_hook")) {
+    register_uninstall_hook(__FILE__, 'openflashchart_core_uninstall');
+}
 ?>
