@@ -4,7 +4,7 @@ Plugin Name: Open Flash Chart Core
 Plugin Script: open-flash-chargs-core.php
 Plugin URI: http://sudarmuthu.com/wordpress/open-flash-chart-core
 Description: Does little else but load the core Open Flash Chart PHP library for any Plugin that wants to utilize it.
-Version: 0.2
+Version: 0.3
 License: GPL
 Author: Sudar
 Author URI: http://sudarmuthu.com/
