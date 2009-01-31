@@ -3,7 +3,7 @@ Contributors: sudar
 Tags: flash, chart, graphs, open-flash-chart
 Requires at least: 2.0
 Tested up to: 2.7
-Stable tag: 0.3
+Stable tag: 0.4
 	
 Does little else but load the core Open Flash Chart PHP library for any Plugin that wants to utilize it.
 	

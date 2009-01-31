@@ -4,7 +4,7 @@ Plugin Name: Open Flash Chart Core
 Plugin Script: open-flash-chargs-core.php
 Plugin URI: http://sudarmuthu.com/wordpress/open-flash-chart-core
 Description: Does little else but load the core Open Flash Chart PHP library for any Plugin that wants to utilize it.
-Version: 0.3
+Version: 0.4
 License: GPL
 Author: Sudar
 Author URI: http://sudarmuthu.com/
@@ -13,6 +13,7 @@ Author URI: http://sudarmuthu.com/
 2008-12-28 - v0.1 - First Version
 2009-01-27 - v0.2 - Second Version
 2009-01-30 - v0.3 - Third Version
+2009-01-31 - v0.4 - Fourth Version
 
 */
 
@@ -68,9 +69,13 @@ function openflashchart_core_options_page() {
 	}
 ?>
 
-<div style="margin:50px auto; text-align:center;">
+<div style="margin:50px auto;">
 	<h3>Open Flash Chart PHP core API library, version 2</h3>
 	<p>Version 2 is available to your other extentions. Read more details about <a href="http://teethgrinder.co.uk/open-flash-chart-2/">Open Flash Chart 2</a>.</p>
+    <h3>Constants</h3>
+    <p>Following are the values of the constants exposed by this Plugin. You can use these constants in your Plugin to refer to Open Flash Chart Libraries</p>
+    <p>SM_OFC_PHP_INC: <?php echo SM_OFC_PHP_INC ?></p>
+    <p>SM_OFC_INC_URL: <?php echo SM_OFC_INC_URL ?></p>
 </div>
 
 <?php
@@ -109,8 +114,8 @@ function openflashchart_filter_plugin_actions($links, $file) {
  */
 function openflashchart_core_install() {
     //These urls can be used by other Plugins
-    add_option("SM_OFC_PHP_INC", SM_OFC_PHP_INC); // PHP include path
-    add_option("SM_OFC_INC_URL", SM_OFC_INC_URL); // include url
+    update_option("SM_OFC_PHP_INC", SM_OFC_PHP_INC); // PHP include path
+    update_option("SM_OFC_INC_URL", SM_OFC_INC_URL); // include url
 }
 
 /**
