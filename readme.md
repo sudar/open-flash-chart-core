@@ -1,9 +1,9 @@
 # open-flash-chart-core #
-**Contributors:** sudar 
-**Tags:** flash, chart, graphs, open-flash-chart
-**Requires at least:** 2.0
-**Tested up to:** 3.5.1
-**Stable tag:** 0.5.1
+**Contributors:** sudar  
+**Tags:** flash, chart, graphs, open-flash-chart  
+**Requires at least:** 2.0  
+**Tested up to:** 3.8.1  
+**Stable tag:** 0.6  
 	
 Does little else but load the core Open Flash Chart PHP library for any Plugin that wants to utilize it.
 	
@@ -53,3 +53,6 @@ Upload the file to your WordPress Plugin directory and then activate it from the
 
 ### v0.5.1 (2013-04-23)
 * Fixed couple of typos in the readme file
+
+### v0.6 (2014-01-27)
+- Fixed warnings

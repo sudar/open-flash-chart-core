@@ -4,7 +4,7 @@ Plugin Name: Open Flash Chart Core
 Plugin Script: open-flash-chargs-core.php
 Plugin URI: http://sudarmuthu.com/wordpress/open-flash-chart-core
 Description: Does little else but load the core Open Flash Chart PHP library for any Plugin that wants to utilize it.
-Version: 0.5.1
+Version: 0.6
 License: GPL
 Author: Sudar
 Author URI: http://sudarmuthu.com/
@@ -16,6 +16,7 @@ Author URI: http://sudarmuthu.com/
 2009-01-31 - v0.4 - Fourth Version
 2013-04-23 - v0.5 - Fixed a security issue in the library
 2013-04-23 - v0.5.1 - Fixed couple of typos in the readme file
+2014-01-27 - v0.6 - Fixed warnings
 
 */
 
@@ -56,10 +57,18 @@ if (!class_exists('open_flash_chart')) {
 	$openflashchart_loaded = true;
 }
 
+/**
+ * Register Scripts
+ *
+ * @since 0.6
+ */
+function smofc_register_scripts() {
+    // Register scripts
+    wp_register_script('json', SM_OFC_INC_URL . "js/json/json2.js", false, '');
+    wp_register_script('swfobject',SM_OFC_INC_URL . "js/swfobject.js", false, '');
+}
+add_action( 'init', 'smofc_register_scripts' );
 
-// Register scripts
-wp_register_script('json', SM_OFC_INC_URL . "js/json/json2.js", false, '');
-wp_register_script('swfobject',SM_OFC_INC_URL . "js/swfobject.js", false, '');
 /**
  * Draw normal options page.
  */
@@ -90,7 +99,7 @@ add_action( 'in_admin_footer', 'openflashchart_admin_footer' );
  */
 function openflashchart_core_options() {
 	if (function_exists('add_options_page')) {
-		add_options_page('openflashchart Core', 'openflashchart Core', 8, 'openflashchart-api-core', 'openflashchart_core_options_page');
+		add_options_page('openflashchart Core', 'openflashchart Core', 'manage_options', 'openflashchart-api-core', 'openflashchart_core_options_page');
 	}
 }
 
